@@ -78,7 +78,7 @@ This system demonstrates **autonomous multi-agent AI coordination** for urban co
 
 | Feature | Description |
 |---------|-------------|
-| **82 Real Sites** | Actual HDB construction sites from official GeoJSON data |
+| **200 Real Sites** | Actual HDB construction sites from official GeoJSON data |
 | **4 Autonomous Agents** | Perception, Risk, Control, and Verification agents working in coordination |
 | **Real-Time WebSocket** | Instant updates between frontend and backend |
 | **Live Environmental Data** | PM2.5, temperature, humidity, wind from data.gov.sg |
