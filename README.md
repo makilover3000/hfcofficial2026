@@ -39,7 +39,7 @@ UrbanPulse AI demonstrates **autonomous multi-agent coordination** that automati
 
 ### How Automatic Reduction Works (No Human Needed)
 
-1. **Perception Agent** continuously monitors all 200 sites every 3 seconds. When noise exceeds 85dB or dust exceeds 50 µg/m³, it flags the site immediately.
+1. **Perception Agent** continuously monitors all 200 sites every 5 seconds. When noise exceeds 85dB or dust exceeds 50 µg/m³, it flags the site immediately.
 
 2. **Risk Agent** calculates the cumulative impact on nearby HDB residents — factoring in wind direction, adjacent site activity, and population density — to determine an exposure risk score.
 
@@ -163,12 +163,12 @@ This system demonstrates this explicitly through the demo:
 
 | Phase | What Happens Automatically |
 |-------|---------------------------|
-| Detection | Perception Agent flags noise >85dB within 3 seconds |
+| Detection | Perception Agent flags noise >85dB within 5 seconds |
 | Risk Assessment | Risk Agent calculates cumulative impact on 2,400+ residents |
 | Equipment Control | Control Agent issues directives: reduce piling intensity, stagger schedules, activate water misting |
 | Verification | Verification Agent confirms reduction achieved (92dB → 62dB = 29% reduction) |
 
-The AI agents operate in a continuous 3-second loop. When thresholds are exceeded, the Control Agent autonomously adjusts equipment parameters — no human clicks a button. The Town Council tab exists for **oversight**, not for triggering the response.
+The AI agents operate in a continuous 5-second loop. When thresholds are exceeded, the Control Agent autonomously adjusts equipment parameters — no human clicks a button. The Town Council tab exists for **oversight**, not for triggering the response.
 
 ### "How can feasibility be improved?"
 
@@ -199,7 +199,7 @@ The AI agents operate in a continuous 3-second loop. When thresholds are exceede
 ```
 Construction Sites (200 real HDB sites)
               ↓
-    Agent Loop (every 3 seconds)
+    Agent Loop (every 5 seconds)
               ↓
 ┌──────────────────────────────────────────┐
 │  Perception → Risk → Control → Verify    │
