@@ -1,6 +1,6 @@
 # UrbanPulse AI — Presentation Guide
 
-A reference guide for understanding every number, metric, and visual across all tabs. Use this to confidently explain the system during your showcase.
+A reference guide for understanding every number, metric, and visual across all tabs. 
 
 ---
 
