@@ -3,3 +3,8 @@ export { ControlPanel } from './ControlPanel';
 export { AgentStatusPanel } from './AgentStatusPanel';
 export { MetricsBar } from './MetricsBar';
 export { ActionLog } from './ActionLog';
+export { TabBar } from './TabBar';
+export { OrchestrationTab } from './OrchestrationTab';
+export { TownCouncilTab } from './TownCouncilTab';
+export { AnalyticsTab } from './AnalyticsTab';
+export { WaveCanvas } from './WaveCanvas';

@@ -1,5 +1,6 @@
 from typing import Dict, Any, List, Set
 from datetime import datetime
+import math
 from ..models.metrics import DistrictMetrics, EnvironmentData
 from ..models.site import SiteState
 from ..agents.orchestrator import AgentOrchestrator
@@ -91,6 +92,97 @@ class AppState:
         self.metrics.environment = env_data
         self.last_env_update = datetime.now()
         self.update_metrics()
+
+    def compute_clusters(self, radius_km: float = 0.5) -> List[Dict[str, Any]]:
+        """Group sites within radius_km using a grid-based spatial index."""
+        # Build spatial grid for O(n) average clustering instead of O(n^3)
+        cell_size = radius_km / 111.0  # degrees per km (approx)
+        grid: Dict[tuple, List[str]] = {}
+
+        for sid, site in self.sites.items():
+            c = site.get('centroid', [0, 0])
+            cell = (int(c[0] / cell_size), int(c[1] / cell_size))
+            grid.setdefault(cell, []).append(sid)
+
+        visited = set()
+        clusters = []
+        cluster_id = 0
+
+        for sid, site in self.sites.items():
+            if sid in visited:
+                continue
+            cluster_sites = [sid]
+            visited.add(sid)
+            queue = [sid]
+
+            while queue:
+                current_id = queue.pop(0)
+                current = self.sites[current_id]
+                c1 = current.get('centroid', [0, 0])
+                cx, cy = int(c1[0] / cell_size), int(c1[1] / cell_size)
+
+                # Only check neighboring grid cells
+                for dx in range(-1, 2):
+                    for dy in range(-1, 2):
+                        for other_id in grid.get((cx + dx, cy + dy), []):
+                            if other_id in visited:
+                                continue
+                            c2 = self.sites[other_id].get('centroid', [0, 0])
+                            lat_diff = abs(c1[1] - c2[1]) * 111
+                            lon_diff = abs(c1[0] - c2[0]) * 111 * math.cos(math.radians(c1[1]))
+                            distance = math.sqrt(lat_diff ** 2 + lon_diff ** 2)
+
+                            if distance < radius_km:
+                                visited.add(other_id)
+                                cluster_sites.append(other_id)
+                                queue.append(other_id)
+
+            if len(cluster_sites) < 2:
+                continue
+
+            sites_data = []
+            lngs, lats = [], []
+            worst_state = 'normal'
+            names = []
+
+            for cs_id in cluster_sites:
+                s = self.sites[cs_id]
+                centroid = s.get('centroid', [0, 0])
+                lngs.append(centroid[0])
+                lats.append(centroid[1])
+                st = s.get('state', 'normal')
+
+                if st == 'high_impact':
+                    worst_state = 'high_impact'
+                elif st == 'elevated' and worst_state != 'high_impact':
+                    worst_state = 'elevated'
+
+                sites_data.append({
+                    'id': cs_id,
+                    'name': s.get('name', cs_id),
+                    'state': st,
+                    'noise_level': s.get('noise_level', 45),
+                    'dust_level': s.get('dust_level', 15)
+                })
+                names.append(s.get('name', cs_id))
+
+            centroid_lng = sum(lngs) / len(lngs)
+            centroid_lat = sum(lats) / len(lats)
+
+            cluster_name_parts = names[:2]
+            cluster_name = ' — '.join(cluster_name_parts) + ' Corridor'
+
+            clusters.append({
+                'id': f'cluster_{cluster_id}',
+                'name': cluster_name,
+                'site_ids': cluster_sites,
+                'centroid': [centroid_lng, centroid_lat],
+                'severity': worst_state,
+                'sites_data': sites_data
+            })
+            cluster_id += 1
+
+        return clusters
 
     def get_all_sites_for_map(self) -> Dict[str, Any]:
         return {

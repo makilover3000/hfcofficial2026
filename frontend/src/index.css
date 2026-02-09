@@ -56,30 +56,67 @@ input[type="range"].slider {
   appearance: none;
   background: transparent;
   cursor: pointer;
+  height: 6px;
+  border-radius: 3px;
+  outline: none;
 }
 
 input[type="range"].slider::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 3px;
   background: #1e293b;
-  height: 8px;
-  border-radius: 4px;
 }
 
 input[type="range"].slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   background: #fff;
-  border: 2px solid var(--mission-accent);
+  border: 2px solid currentColor;
   margin-top: -5px;
-  box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
-  transition: all 0.15s ease;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+  cursor: grab;
+  position: relative;
+  z-index: 2;
 }
 
 input[type="range"].slider::-webkit-slider-thumb:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 15px rgba(0, 212, 255, 0.8);
+  transform: scale(1.15);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.5);
+}
+
+input[type="range"].slider:active::-webkit-slider-thumb {
+  cursor: grabbing;
+  transform: scale(1.2);
+}
+
+/* Firefox */
+input[type="range"].slider::-moz-range-track {
+  height: 6px;
+  border-radius: 3px;
+  background: #1e293b;
+  border: none;
+}
+
+input[type="range"].slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid currentColor;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+  cursor: grab;
+}
+
+input[type="range"].slider:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+input[type="range"].slider:disabled::-webkit-slider-thumb {
+  cursor: not-allowed;
 }
 
 /* Glowing borders */
@@ -163,6 +200,18 @@ input[type="range"].slider::-webkit-slider-thumb:hover {
     linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
   background-size: 20px 20px;
+}
+
+/* Marquee scroll for overflowing agent text */
+@keyframes marquee {
+  0%, 15% { transform: translateX(0); }
+  85%, 100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: inline-block;
+  padding-right: 2rem;
+  animation: marquee 8s ease-in-out infinite alternate;
 }
 
 /* Mapbox attribution styling */

@@ -34,6 +34,14 @@ class AgentOrchestrator:
         if len(self.action_log) > 100:
             self.action_log = self.action_log[-100:]
 
+    async def _broadcast_agent_status(self):
+        """Broadcast current agent statuses so frontend can shuffle cards."""
+        if self.broadcast_callback:
+            await self.broadcast_callback({
+                'type': 'agent_update',
+                'agents': self.get_all_agent_status()
+            })
+
     async def process_cycle(self, sites: Dict[str, Any], metrics: Any) -> Dict[str, Any]:
         results = {
             'perception': [],
@@ -108,6 +116,27 @@ class AgentOrchestrator:
             })
 
         return results
+
+    async def run_agent_shuffle(self, site_id: str, site_name: str):
+        """Visual agent shuffle cycle triggered by user actions like Start Heavy Work."""
+        agents = [
+            (self.perception, 'Perception', '🔵', f'Detecting noise spike at {site_name}...', 2.0),
+            (self.risk, 'Risk', '🟢', f'Assessing impact risk for {site_name}...', 2.5),
+            (self.control, 'Control', '🟠', f'Issuing control directives for {site_name}...', 2.0),
+            (self.verification, 'Verification', '🟡', f'Verifying response at {site_name}...', 2.0),
+        ]
+
+        for agent, name, icon, action_msg, duration in agents:
+            agent.set_status('processing', action_msg, 85)
+            await self._broadcast_agent_status()
+            self.add_to_log({
+                'agent': name, 'icon': icon, 'type': 'agent_action',
+                'message': action_msg, 'site_id': site_id, 'site_name': site_name
+            })
+            await asyncio.sleep(duration)
+            agent.set_status('active', action_msg.replace('...', ' — done'), 60)
+
+        await self._broadcast_agent_status()
 
     def get_recent_logs(self, count: int = 20) -> List[Dict[str, Any]]:
         return self.action_log[-count:]

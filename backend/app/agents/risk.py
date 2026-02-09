@@ -76,11 +76,19 @@ class RiskAgent(BaseAgent):
             risk = self._calculate_risk_score(noise, dust)
             max_risk = max(max_risk, risk)
 
+        # Only compute nearby-site checks for elevated/high-impact sites (avoids O(n^2) for all sites)
+        problem_ids = elevated_sites + high_impact_sites
+        for site_id in problem_ids:
+            site = sites[site_id]
+            noise = site.get('noise_level', 45)
+            dust = site.get('dust_level', 15)
+            risk = self._calculate_risk_score(noise, dust)
+
             nearby = self._find_nearby_sites(site, sites)
             nearby_elevated = [n for n in nearby
                             if sites[n].get('state') in [SiteState.ELEVATED, SiteState.HIGH_IMPACT, 'elevated', 'high_impact']]
 
-            if nearby_elevated and state in [SiteState.ELEVATED, SiteState.HIGH_IMPACT, 'elevated', 'high_impact']:
+            if nearby_elevated:
                 cumulative_risk = risk * (1 + 0.3 * len(nearby_elevated))
                 actions.append({
                     'type': 'cumulative_risk',

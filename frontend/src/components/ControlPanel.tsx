@@ -136,21 +136,20 @@ export function ControlPanel({ site, onClose, onControl }: ControlPanelProps) {
                   {noiseLevel.toFixed(0)} dB
                 </span>
               </div>
-              <div className="relative">
-                <input
-                  type="range"
-                  min="40"
-                  max="100"
-                  step="1"
-                  value={noiseLevel}
-                  onChange={(e) => handleNoiseChange(Number(e.target.value))}
-                  className="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer slider"
-                />
-                <div
-                  className={`absolute top-0 left-0 h-2 rounded-lg pointer-events-none ${getNoiseColor(noiseLevel)}`}
-                  style={{ width: `${((noiseLevel - 40) / 60) * 100}%` }}
-                />
-              </div>
+              <input
+                type="range"
+                min="40"
+                max="100"
+                step="1"
+                value={noiseLevel}
+                onChange={(e) => handleNoiseChange(Number(e.target.value))}
+                className="w-full slider"
+                style={{
+                  color: noiseLevel > 85 ? '#ef4444' : noiseLevel > 75 ? '#eab308' : '#22c55e',
+                  background: `linear-gradient(to right, ${noiseLevel > 85 ? '#ef4444' : noiseLevel > 75 ? '#eab308' : '#22c55e'} 0%, ${noiseLevel > 85 ? '#ef4444' : noiseLevel > 75 ? '#eab308' : '#22c55e'} ${((noiseLevel - 40) / 60) * 100}%, #1e293b ${((noiseLevel - 40) / 60) * 100}%, #1e293b 100%)`,
+                  borderRadius: '3px',
+                }}
+              />
               <div className="flex justify-between text-xs text-slate-500">
                 <span>40 dB</span>
                 <span className="text-yellow-500">75 dB</span>
@@ -169,20 +168,24 @@ export function ControlPanel({ site, onClose, onControl }: ControlPanelProps) {
                   {dustLevel.toFixed(0)} µg/m³
                 </span>
               </div>
-              <div className="relative">
-                <input
-                  type="range"
-                  min="0"
-                  max="100"
-                  step="1"
-                  value={dustLevel}
-                  onChange={(e) => handleDustChange(Number(e.target.value))}
-                  className="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer slider"
-                />
-                <div
-                  className={`absolute top-0 left-0 h-2 rounded-lg pointer-events-none ${getDustColor(dustLevel)}`}
-                  style={{ width: `${dustLevel}%` }}
-                />
+              <input
+                type="range"
+                min="0"
+                max="100"
+                step="1"
+                value={dustLevel}
+                onChange={(e) => handleDustChange(Number(e.target.value))}
+                className="w-full slider"
+                style={{
+                  color: dustLevel > 50 ? '#ef4444' : dustLevel > 35 ? '#eab308' : '#22c55e',
+                  background: `linear-gradient(to right, ${dustLevel > 50 ? '#ef4444' : dustLevel > 35 ? '#eab308' : '#22c55e'} 0%, ${dustLevel > 50 ? '#ef4444' : dustLevel > 35 ? '#eab308' : '#22c55e'} ${dustLevel}%, #1e293b ${dustLevel}%, #1e293b 100%)`,
+                  borderRadius: '3px',
+                }}
+              />
+              <div className="flex justify-between text-xs text-slate-500">
+                <span>0 µg/m³</span>
+                <span className="text-yellow-500">35</span>
+                <span className="text-red-500">100</span>
               </div>
             </div>
 
@@ -197,22 +200,21 @@ export function ControlPanel({ site, onClose, onControl }: ControlPanelProps) {
                   {dustSuppression.toFixed(0)}%
                 </span>
               </div>
-              <div className="relative">
-                <input
-                  type="range"
-                  min="0"
-                  max="100"
-                  step="1"
-                  value={dustSuppression}
-                  onChange={(e) => handleSuppressionChange(Number(e.target.value))}
-                  disabled={agentControlled}
-                  className={`w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer slider ${agentControlled ? 'opacity-50' : ''}`}
-                />
-                <div
-                  className="absolute top-0 left-0 h-2 rounded-lg pointer-events-none bg-cyan-500"
-                  style={{ width: `${dustSuppression}%` }}
-                />
-              </div>
+              <input
+                type="range"
+                min="0"
+                max="100"
+                step="1"
+                value={dustSuppression}
+                onChange={(e) => handleSuppressionChange(Number(e.target.value))}
+                disabled={agentControlled}
+                className="w-full slider"
+                style={{
+                  color: '#06b6d4',
+                  background: `linear-gradient(to right, #06b6d4 0%, #06b6d4 ${dustSuppression}%, #1e293b ${dustSuppression}%, #1e293b 100%)`,
+                  borderRadius: '3px',
+                }}
+              />
               {agentControlled && (
                 <p className="text-xs text-cyan-400/70">AI agent is controlling dust suppression</p>
               )}
