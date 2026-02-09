@@ -53,6 +53,39 @@ export function MetricsBar({ metrics }: MetricsBarProps) {
 
         <div className="w-px h-8 bg-slate-700" />
 
+        {/* UrbanPulse AI Logo */}
+        <motion.div
+          className="flex items-center gap-2 shrink-0"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.1 }}
+        >
+          <svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="1" y="1" width="30" height="30" rx="8" stroke="url(#logoGrad)" strokeWidth="1.5" fill="rgba(6,182,212,0.08)" />
+            <path d="M8 20 L12 12 L16 18 L20 10 L24 16" stroke="url(#pulseGrad)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            <circle cx="16" cy="16" r="3" fill="none" stroke="#22d3ee" strokeWidth="1.2" opacity="0.6" />
+            <circle cx="16" cy="16" r="1" fill="#22d3ee" />
+            <defs>
+              <linearGradient id="logoGrad" x1="0" y1="0" x2="32" y2="32">
+                <stop offset="0%" stopColor="#22d3ee" />
+                <stop offset="100%" stopColor="#3b82f6" />
+              </linearGradient>
+              <linearGradient id="pulseGrad" x1="8" y1="16" x2="24" y2="16">
+                <stop offset="0%" stopColor="#22d3ee" />
+                <stop offset="100%" stopColor="#818cf8" />
+              </linearGradient>
+            </defs>
+          </svg>
+          <div className="flex flex-col">
+            <span className="text-xs font-bold tracking-tight leading-none">
+              <span className="text-cyan-400">Urban</span><span className="text-blue-400">Pulse</span>
+            </span>
+            <span className="text-[10px] text-slate-400 font-medium tracking-wider leading-none mt-0.5">AI</span>
+          </div>
+        </motion.div>
+
+        <div className="w-px h-8 bg-slate-700" />
+
         {/* Max Noise */}
         <div className="flex items-center gap-2 shrink-0">
           <Volume2 className={`w-4 h-4 ${getNoiseColor(metrics.max_noise)}`} />
