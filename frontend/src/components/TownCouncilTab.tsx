@@ -15,7 +15,7 @@ const SEVERITY_CONFIG: Record<string, { color: string; bg: string; border: strin
   info: { color: 'text-slate-400', bg: 'bg-slate-500/10', border: 'border-slate-500', icon: Info },
 };
 
-const API_BASE = 'http://localhost:8000';
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
 export function TownCouncilTab({ alerts, onApprove, onOverride }: TownCouncilTabProps) {
   const approvedCount = alerts.filter(a => a.status === 'approved').length;

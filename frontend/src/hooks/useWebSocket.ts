@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import type { WebSocketMessage, SiteControl } from '../types';
 
-const WS_URL = 'ws://localhost:8000/ws';
+const WS_URL = import.meta.env.VITE_API_URL
+  ? import.meta.env.VITE_API_URL.replace(/^http/, 'ws') + '/ws'
+  : 'ws://localhost:8000/ws';
 
 export function useWebSocket(onMessage: (message: WebSocketMessage) => void) {
   const wsRef = useRef<WebSocket | null>(null);
