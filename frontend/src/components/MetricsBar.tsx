@@ -83,7 +83,7 @@ export function MetricsBar({ metrics }: MetricsBarProps) {
           </svg>
           <div className="flex flex-col">
             <span className="text-sm font-bold tracking-tight leading-none">
-              <span className="text-cyan-400">Urban</span><span className="text-blue-400">Pulse</span>
+              <span className="text-cyan-400">Urban</span><span className="text-blue-400">Construct</span>
             </span>
             <span className="text-[9px] text-slate-500 font-semibold tracking-[0.2em] leading-none mt-0.5 uppercase">ai system</span>
           </div>
