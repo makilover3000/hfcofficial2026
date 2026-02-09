@@ -309,7 +309,7 @@ The metrics bar at the top of every tab shows district-wide summary numbers.
 - Risk score calculation (real formula, simulated inputs)
 - Affected residents estimate (real formula, estimated multipliers)
 
-### Hardcoded / Static (Presentation Only)
+### Static
 - Analytics tab: Activity Distribution chart numbers
 - Analytics tab: Construction Density Heatmap (random dots)
 - Analytics tab: Total Decisions (1,247), Actions Deployed (438), Avg Response Time (2.4s)
