@@ -126,7 +126,7 @@ export function WelcomeOverlay() {
             <div className="shrink-0 px-8 pt-8 pb-4">
               <div className="flex items-center gap-3 mb-1">
                 <h1 className="text-2xl font-bold text-white">
-                  <span className="text-cyan-400">UrbanPulse</span> AI
+                  <span className="text-cyan-400">UrbanConstruct</span> AI
                 </h1>
                 <span className="px-2 py-0.5 rounded text-xs font-semibold bg-cyan-500/20 text-cyan-400 border border-cyan-500/30">
                   HFC 2026

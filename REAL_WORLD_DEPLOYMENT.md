@@ -1,4 +1,4 @@
-# Real-World Deployment — How UrbanPulse AI Works in Practice
+# Real-World Deployment — How UrbanConstruct AI Works in Practice
 
 **By Makendra Prasad | Hack for Cities 2026 — Singapore Management University**
 
@@ -12,7 +12,7 @@ Today, Singapore's construction sites operate in isolation. Each contractor moni
 
 ## How This System Plugs Into Existing Infrastructure
 
-UrbanPulse AI does not require new hardware. Singapore's construction sites are **already required** to install noise and dust monitoring equipment under NEA regulations. These IoT sensors (noise meters, PM2.5 monitors) already generate real-time data. What is missing is a **central intelligence layer** that reads data from all sensors simultaneously and coordinates responses across sites.
+UrbanConstruct AI does not require new hardware. Singapore's construction sites are **already required** to install noise and dust monitoring equipment under NEA regulations. These IoT sensors (noise meters, PM2.5 monitors) already generate real-time data. What is missing is a **central intelligence layer** that reads data from all sensors simultaneously and coordinates responses across sites.
 
 **Here is how it works in deployment:**
 
@@ -44,7 +44,7 @@ When cumulative exposure exceeds safe thresholds, the Control Agent issues direc
 - **Activate dust suppression** — trigger water misting systems (already installed at most sites) to increase spray coverage from 50% to 85-90%
 - **Pause secondary activities** — if Site A is the primary violator, pause excavation at Site B until Site A's phase completes
 
-These directives are sent to the site's Building Management System (BMS) or directly to smart equipment controllers. In Singapore, BCA's CORENET system already digitizes construction workflows — UrbanPulse AI would integrate as an additional coordination layer.
+These directives are sent to the site's Building Management System (BMS) or directly to smart equipment controllers. In Singapore, BCA's CORENET system already digitizes construction workflows — UrbanConstruct AI would integrate as an additional coordination layer.
 
 ### 5. Verification (Verification Agent)
 
@@ -78,7 +78,7 @@ This is not a fully autonomous system that replaces humans. It is a **first-resp
 
 ## What Changes for Stakeholders
 
-| Stakeholder | Before UrbanPulse AI | After UrbanPulse AI |
+| Stakeholder | Before UrbanConstruct AI | After UrbanConstruct AI |
 |-------------|---------------------|---------------------|
 | **HDB Residents** | File complaint after suffering noise/dust. Wait days for response. No visibility into what is happening | Cumulative impact detected and mitigated within seconds. Exposure reduced by 30%+ before residents even notice |
 | **Town Council** | Receives complaints reactively. No data on cumulative impact. Cannot coordinate across contractors | Receives real-time alerts with data. Can approve or override AI decisions. Downloadable compliance reports |
@@ -89,4 +89,4 @@ This is not a fully autonomous system that replaces humans. It is a **first-resp
 
 ## The Key Insight
 
-The problem is not that individual sites are badly managed — most contractors follow regulations. The problem is that **nobody is looking at the combined picture**. Three sites each producing 75dB (below the 85dB threshold) create a cumulative 85dB+ environment for residents caught in the middle. UrbanPulse AI is the first system that monitors, assesses, and acts on this **district-level cumulative impact** — autonomously, in real time, without waiting for a complaint.
+The problem is not that individual sites are badly managed — most contractors follow regulations. The problem is that **nobody is looking at the combined picture**. Three sites each producing 75dB (below the 85dB threshold) create a cumulative 85dB+ environment for residents caught in the middle. UrbanConstruct AI is the first system that monitors, assesses, and acts on this **district-level cumulative impact** — autonomously, in real time, without waiting for a complaint.

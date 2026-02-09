@@ -304,7 +304,7 @@ function App() {
                     className="text-center"
                   >
                     <h1 className="text-xl font-bold text-white tracking-tight">
-                      <span className="text-cyan-400">UrbanPulse</span> AI
+                      <span className="text-cyan-400">UrbanConstruct</span> AI
                     </h1>
                     <p className="text-xs text-slate-400 mt-1">
                       Multi-Agent AI System for District-Wide Coordination

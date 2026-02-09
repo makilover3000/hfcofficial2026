@@ -1,4 +1,4 @@
-# UrbanPulse AI — Construction Orchestration System
+# UrbanConstruct AI — Construction Orchestration System
 
 **Hack for Cities 2026 | Singapore Management University**
 
@@ -35,7 +35,7 @@ Frontend runs on `http://localhost:5173` — open this in your browser.
 
 ## What It Does
 
-UrbanPulse AI demonstrates **autonomous multi-agent coordination** that automatically reduces construction equipment activity without human intervention:
+UrbanConstruct AI demonstrates **autonomous multi-agent coordination** that automatically reduces construction equipment activity without human intervention:
 
 ### How Automatic Reduction Works (No Human Needed)
 

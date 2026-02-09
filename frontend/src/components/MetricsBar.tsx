@@ -36,7 +36,7 @@ export function MetricsBar({ metrics }: MetricsBarProps) {
   return (
     <div className="h-14 bg-slate-900/90 backdrop-blur-sm border-b border-slate-700/50 px-4 flex items-center justify-between">
       <div className="flex items-center gap-6 overflow-x-auto">
-        {/* UrbanPulse AI Logo */}
+        {/* UrbanConstruct AI Logo */}
         <motion.div
           className="flex items-center gap-2.5 shrink-0"
           initial={{ opacity: 0, x: -10 }}
